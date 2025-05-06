@@ -7,7 +7,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "tb_itens")
-public class Itens {
+public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

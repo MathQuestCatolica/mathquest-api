@@ -1,6 +1,6 @@
 package com.mathquest.mathquest.feature.player.domain;
 
-import com.mathquest.mathquest.feature.itens.domain.Itens;
+import com.mathquest.mathquest.feature.itens.domain.Item;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -19,5 +19,5 @@ public class PlayerItens {
 
     @ManyToOne
     @JoinColumn(name = "item_id", nullable = false)
-    private Itens item;
+    private Item item;
 }
