@@ -1,6 +1,6 @@
-package com.mathquest.mathquest.feature.itens.repository;
+package com.mathquest.mathquest.feature.item.repository;
 
-import com.mathquest.mathquest.feature.itens.domain.Item;
+import com.mathquest.mathquest.feature.item.domain.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

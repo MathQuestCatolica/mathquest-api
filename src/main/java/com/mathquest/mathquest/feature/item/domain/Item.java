@@ -1,20 +1,20 @@
-package com.mathquest.mathquest.feature.itens.domain;
+package com.mathquest.mathquest.feature.item.domain;
 
-import com.mathquest.mathquest.feature.itens.enums.TypeItemEnum;
+import com.mathquest.mathquest.feature.item.enums.TypeItemEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "tb_itens")
+@Table(name = "tb_item")
 public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String nome;
+    private String name;
 
     @Convert(converter = TypeItemEnum.class)
-    private TypeItemEnum tipo;
+    private TypeItemEnum type;
 }

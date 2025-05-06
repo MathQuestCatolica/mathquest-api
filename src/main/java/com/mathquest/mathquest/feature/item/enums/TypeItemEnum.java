@@ -1,4 +1,4 @@
-package com.mathquest.mathquest.feature.itens.enums;
+package com.mathquest.mathquest.feature.item.enums;
 
 public enum TypeItemEnum {
     RELIQUIA(0),
