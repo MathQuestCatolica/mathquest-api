@@ -46,7 +46,6 @@ public class PlayerService {
                 .build();
     }
 
-
     public void deletePlayer(Long id) {
         if (!playerRepository.existsById(id)) {
             throw new RuntimeException("Player not found with id: " + id);
@@ -66,6 +65,7 @@ public class PlayerService {
         return playerRepository.save(player);
     }
 
-
-
+    public Player getPlayerByUsername(String username) {
+        return playerRepository.findByUsername(username);
+    }
 }
