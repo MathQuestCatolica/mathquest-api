@@ -5,6 +5,9 @@ import com.mathquest.mathquest.feature.player.dto.PlayerDTO;
 import com.mathquest.mathquest.feature.player.repository.PlayerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Objects;
+
 @Service
 public class PlayerService {
 
@@ -24,4 +27,45 @@ public class PlayerService {
 
         return playerRepository.save(player);
     }
+
+    public List<Player> getAllPlayers() {
+        return playerRepository.findAll();
+    }
+
+    public PlayerDTO getPlayerById(Long id) {
+        Player player = playerRepository.findById(id).orElse(null);
+
+        if (Objects.isNull(player)) return null;
+
+        return PlayerDTO.builder()
+                .id(player.getId())
+                .username(player.getUsername())
+                .password(player.getPassword())
+                .level(player.getLevel())
+                .xp(player.getXp())
+                .build();
+    }
+
+
+    public void deletePlayer(Long id) {
+        if (!playerRepository.existsById(id)) {
+            throw new RuntimeException("Player not found with id: " + id);
+        }
+        playerRepository.deleteById(id);
+    }
+
+    public Player editPlayer(Long id, PlayerDTO playerDTO) {
+        Player player = playerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Player not found with id: " + id));
+
+        player.setUsername(playerDTO.getUsername());
+        player.setPassword(playerDTO.getPassword());
+        player.setLevel(playerDTO.getLevel());
+        player.setXp(playerDTO.getXp());
+
+        return playerRepository.save(player);
+    }
+
+
+
 }
