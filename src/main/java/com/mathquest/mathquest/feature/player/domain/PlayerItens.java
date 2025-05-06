@@ -1,6 +1,6 @@
 package com.mathquest.mathquest.feature.player.domain;
 
-import com.mathquest.mathquest.feature.itens.domain.Item;
+import com.mathquest.mathquest.feature.item.domain.Item;
 import jakarta.persistence.*;
 import lombok.Data;
 
