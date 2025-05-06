@@ -1,9 +1,17 @@
 package com.mathquest.mathquest.feature.player.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Entity
 @Table(name = "tb_player")
+@Builder
+@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
