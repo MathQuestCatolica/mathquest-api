@@ -1,6 +1,6 @@
-package com.mathquest.mathquest.feature.player.enums;
+package com.mathquest.mathquest.feature.itens.enums;
 
-public enum TipoItemEnum {
+public enum TypeItemEnum {
     RELIQUIA(0),
     ARMA(1),
     ARMADURA(2),
@@ -8,7 +8,7 @@ public enum TipoItemEnum {
 
     private final int code;
 
-    TipoItemEnum(int codigo) {
+    TypeItemEnum(int codigo) {
         this.code = codigo;
     }
 
@@ -16,8 +16,8 @@ public enum TipoItemEnum {
         return code;
     }
 
-    public static TipoItemEnum getTypeItemByCode(int code) {
-        for (TipoItemEnum tipo : values()) {
+    public static TypeItemEnum getTypeItemByCode(int code) {
+        for (TypeItemEnum tipo : values()) {
             if (tipo.getType() == code) {
                 return tipo;
             }

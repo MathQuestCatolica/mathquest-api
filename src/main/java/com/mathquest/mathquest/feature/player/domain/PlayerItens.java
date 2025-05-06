@@ -1,5 +1,6 @@
 package com.mathquest.mathquest.feature.player.domain;
 
+import com.mathquest.mathquest.feature.itens.domain.Itens;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -20,4 +21,3 @@ public class PlayerItens {
     @JoinColumn(name = "item_id", nullable = false)
     private Itens item;
 }
-

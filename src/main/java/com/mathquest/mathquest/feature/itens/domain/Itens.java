@@ -1,6 +1,6 @@
-package com.mathquest.mathquest.feature.player.domain;
+package com.mathquest.mathquest.feature.itens.domain;
 
-import com.mathquest.mathquest.feature.player.enums.TipoItemEnum;
+import com.mathquest.mathquest.feature.itens.enums.TypeItemEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,6 +15,6 @@ public class Itens {
 
     private String nome;
 
-    @Convert(converter = TipoItemEnum.class)
-    private TipoItemEnum tipo;
+    @Convert(converter = TypeItemEnum.class)
+    private TypeItemEnum tipo;
 }

@@ -1,4 +1,4 @@
-package com.mathquest.mathquest.feature.player.domain;
+package com.mathquest.mathquest.feature.challenges.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
