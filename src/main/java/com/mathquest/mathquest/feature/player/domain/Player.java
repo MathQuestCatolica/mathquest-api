@@ -6,10 +6,9 @@ import lombok.*;
 @Entity
 @Table(name = "tb_player")
 @Builder
-@RequiredArgsConstructor
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

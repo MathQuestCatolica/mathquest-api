@@ -15,6 +15,6 @@ public class Item {
 
     private String name;
 
-    @Convert(converter = TypeItemEnum.class)
+    @Enumerated(EnumType.STRING)
     private TypeItemEnum type;
 }
