@@ -1,5 +1,6 @@
 package com.mathquest.mathquest.feature.scenario.domain;
 
+import com.mathquest.mathquest.feature.player.domain.Player;
 import jakarta.persistence.*;
 import lombok.Data;
 

@@ -35,6 +35,8 @@ public class PlayerController {
     public ResponseEntity<ResponseDTO<PlayerDTO>> getPlayerById(@PathVariable("id") long playerID) {
         PlayerDTO player = playerService.getPlayerById(playerID);
 
+        
+
         ResponseDTO<PlayerDTO> response = new ResponseDTO<>(
                 200,
                 "Player retrieved successfully",
