@@ -1,7 +1,10 @@
 package com.mathquest.mathquest.feature.player.domain;
 
+import com.mathquest.mathquest.feature.playeritem.domain.PlayerItem;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "tb_player")
@@ -26,4 +29,7 @@ public class Player {
 
     @Column(name = "xp", nullable = false)
     private Integer xp;
+
+    @OneToMany
+    List<PlayerItem> playerItems;
 }

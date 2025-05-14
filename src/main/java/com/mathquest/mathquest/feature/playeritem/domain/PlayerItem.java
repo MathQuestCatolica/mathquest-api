@@ -1,13 +1,14 @@
-package com.mathquest.mathquest.feature.player.domain;
+package com.mathquest.mathquest.feature.playeritem.domain;
 
 import com.mathquest.mathquest.feature.item.domain.Item;
+import com.mathquest.mathquest.feature.player.domain.Player;
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "tb_player_itens")
+@Table(name = "tb_player_item")
 @Data
-public class PlayerItens {
+public class PlayerItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

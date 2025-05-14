@@ -46,6 +46,11 @@ public class PlayerService {
                 .build();
     }
 
+    public Player getPlayerByIdOrThrow(Long id) {
+        return playerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Player not found with id: " + id));
+    }
+
     public void deletePlayer(Long id) {
         if (!playerRepository.existsById(id)) {
             throw new RuntimeException("Player not found with id: " + id);
