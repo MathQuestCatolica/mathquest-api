@@ -9,6 +9,7 @@ import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,8 +34,9 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<ResponseDTO<Object>> login(@RequestBody LoginDTO loginDTO) {
-        authService.login(loginDTO);
+        String token = authService.login(loginDTO);
         return ResponseEntity.ok(ResponseDTO.builder()
+                .data(token)
                 .statusMessage(HttpStatus.OK.getReasonPhrase())
                 .statusCode(200)
                 .timestamp(LocalDateTime.now())

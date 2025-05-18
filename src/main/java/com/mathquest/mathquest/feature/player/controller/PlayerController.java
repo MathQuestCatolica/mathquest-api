@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/clients")
+@RequestMapping("/api/v1/players")
 public class PlayerController {
     @Autowired
     private PlayerService playerService;
@@ -44,21 +44,6 @@ public class PlayerController {
                 player
         );
         return ResponseEntity.ok(response);
-    }
-
-
-    @PostMapping("/create_player")
-    public ResponseEntity<ResponseDTO<Player>> createPlayer(@RequestBody PlayerDTO playerDTO) {
-        Player player = playerService.createPlayer(playerDTO);
-
-        ResponseDTO<Player> response = new ResponseDTO<>(
-                201,
-                "Player created successfully",
-                LocalDateTime.now(),
-                player
-        );
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PutMapping("/{id}")

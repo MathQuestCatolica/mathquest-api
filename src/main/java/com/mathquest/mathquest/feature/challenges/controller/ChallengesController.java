@@ -1,4 +1,4 @@
-package com.mathquest.mathquest.feature.player.controller;
+package com.mathquest.mathquest.feature.challenges.controller;
 
 import com.mathquest.mathquest.feature.player.domain.Player;
 import com.mathquest.mathquest.feature.player.dto.PlayerDTO;
@@ -13,8 +13,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/clients")
-public class ChallangesController {
+@RequestMapping("/api/v1/challenges")
+public class ChallengesController {
     @Autowired
     private PlayerService playerService;
 
