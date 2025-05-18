@@ -1,4 +1,4 @@
-package com.mathquest.mathquest.config.security.util;
+package com.mathquest.mathquest.config.security.utils;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -33,7 +33,7 @@ public class JwtUtil {
 
     public boolean validateToken(String token) {
         try {
-            getClaims(token); // vai lançar exceção se inválido
+            getClaims(token);
             return true;
         } catch (JwtException | IllegalArgumentException e) {
             System.out.println(">>> Token inválido: " + e.getMessage());

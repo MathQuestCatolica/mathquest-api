@@ -1,4 +1,4 @@
-package com.mathquest.mathquest.config.security.util;
+package com.mathquest.mathquest.config.security.utils;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
