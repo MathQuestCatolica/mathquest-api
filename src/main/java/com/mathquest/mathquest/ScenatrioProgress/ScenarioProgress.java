@@ -1,6 +1,7 @@
-package com.mathquest.mathquest.feature.scenario.domain;
+package com.mathquest.mathquest.ScenatrioProgress;
 
 import com.mathquest.mathquest.feature.player.domain.Player;
+import com.mathquest.mathquest.feature.scenario.domain.Scenario;
 import jakarta.persistence.*;
 import lombok.Data;
 
