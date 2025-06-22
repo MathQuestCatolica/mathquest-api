@@ -6,26 +6,37 @@ import com.mathquest.mathquest.feature.ScenatrioProgress.dto.ScenarioProgressDTO
 import com.mathquest.mathquest.feature.ScenatrioProgress.repository.ScenarioProgressRepository;
 import com.mathquest.mathquest.feature.player.domain.Player;
 import com.mathquest.mathquest.feature.player.service.PlayerService;
+import com.mathquest.mathquest.feature.rewards.service.RewardService;
 import com.mathquest.mathquest.feature.scenario.domain.Scenario;
 import com.mathquest.mathquest.feature.scenario.service.ScenarioService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ScenarioProgressService {
-
+    @Autowired
     private final ScenarioProgressRepository scenarioProgressRepository;
+
+    @Autowired
     private final PlayerService playerService;
+
+    @Autowired
     private final ScenarioService scenarioService;
+
+    @Autowired
+    private final RewardService rewardService;
 
     public ScenarioProgressService(ScenarioProgressRepository scenarioProgressRepository,
                                    PlayerService playerService,
-                                   ScenarioService scenarioService) {
+                                   ScenarioService scenarioService, RewardService rewardService) {
         this.scenarioProgressRepository = scenarioProgressRepository;
         this.playerService = playerService;
         this.scenarioService = scenarioService;
+        this.rewardService = rewardService;
     }
 
     public ScenarioProgressDTO getScenarioProgressById(Long id) {
@@ -81,7 +92,7 @@ public class ScenarioProgressService {
     private ScenarioProgress convertToEntity(ScenarioProgressDTO dto) {
         ScenarioProgress progress = new ScenarioProgress();
         if (dto.getPlayerId() != null) {
-            progress.setPlayer(playerService.getPlayerByIdOrThrow(dto.getScenarioId()));
+            progress.setPlayer(playerService.getPlayerByIdOrThrow(dto.getPlayerId()));
         }
         if (dto.getScenarioId() != null) {
             progress.setScenario(scenarioService.getScenarioEntityByID(dto.getScenarioId()));
@@ -100,6 +111,27 @@ public class ScenarioProgressService {
         progress.setTotalTime(dto.getTotalTime());
 
         progress = scenarioProgressRepository.save(progress);
+        return ScenarioProgressDTO.fromEntity(progress);
+    }
+
+    @Transactional
+    public ScenarioProgressDTO passScenario(AssignScenarioProgressDTO dto) {
+
+        Player player = playerService.getPlayerByIdOrThrow(dto.getPlayerId());
+        Scenario scenario = scenarioService.getScenarioEntityByID(dto.getScenarioId());
+
+        player.setLevel(player.getLevel() + 1);
+        player.setXp(player.getXp() + 100);
+        rewardService.recalculateRewards(player.getId());
+        playerService.savePlayer(player);
+
+        ScenarioProgress progress = new ScenarioProgress();
+        progress.setPlayer(player);
+        progress.setScenario(scenario);
+        progress.setTotalTime(dto.getTotalTime());
+
+        progress = scenarioProgressRepository.save(progress);
+
         return ScenarioProgressDTO.fromEntity(progress);
     }
 }
