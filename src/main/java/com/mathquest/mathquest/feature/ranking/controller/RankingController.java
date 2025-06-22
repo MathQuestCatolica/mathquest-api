@@ -19,9 +19,9 @@ public class RankingController {
     private RankingService rankingService;
 
     @GetMapping("/top10")
-    public ResponseEntity<ResponseDTO<List<Player>>> getTop10Players() {
+    public ResponseEntity<ResponseDTO<List<String>>> getTop10Players() {
         return ResponseEntity.ok(
-            ResponseDTO.<List<Player>>builder()
+            ResponseDTO.<List<String>>builder()
                 .data(rankingService.getTop10Players())
                 .statusMessage("Top 10 players retrieved successfully.")
                 .statusCode(200)
@@ -30,9 +30,9 @@ public class RankingController {
     }
 
     @GetMapping("top100")
-    public ResponseEntity<ResponseDTO<List<Player>>> getTop100Players() {
+    public ResponseEntity<ResponseDTO<List<String>>> getTop100Players() {
         return ResponseEntity.ok(
-                ResponseDTO.<List<Player>>builder()
+                ResponseDTO.<List<String>>builder()
                         .data(rankingService.getTop10Players())
                         .statusMessage("Top 100 players retrieved successfully.")
                         .statusCode(200)

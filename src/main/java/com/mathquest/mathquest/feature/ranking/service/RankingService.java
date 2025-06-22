@@ -13,12 +13,21 @@ public class RankingService {
     @Autowired
     private PlayerRepository playerRepository;
 
-    public List<Player> getTop10Players() {
-        return playerRepository.findTop10Player();
+    public List<String> getTop10Players() {
+        List<Player> top10Player = playerRepository.findTop10Player();
+        List<String> playerNames = top10Player.stream()
+                .map(Player::getUsername)
+                .toList();
+
+        return playerNames;
     }
 
-    public List<Player> getTop100Players() {
-        return playerRepository.findTop100Player();
+    public List<String> getTop100Players() {
+        List<Player> top100Players = playerRepository.findTop100Player();
+        List<String> playerNames = top100Players.stream()
+                .map(Player::getUsername)
+                .toList();
+        return playerNames;
     }
 
     public Long getPlayerRanking(Long playerId) {
