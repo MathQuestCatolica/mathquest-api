@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
 public class ScenarioDTO {
     private Long id;
     private String name;

@@ -1,7 +1,5 @@
 package com.mathquest.mathquest.feature.rewards.dto;
 
-package com.mathquest.mathquest.feature.rewards.api.dto;
-
 import com.mathquest.mathquest.feature.item.domain.Item;
 import com.mathquest.mathquest.feature.rewards.domain.Reward;
 import lombok.AllArgsConstructor;
@@ -32,13 +30,16 @@ public class RewardDTO {
     }
 
     public static Reward toEntity(RewardDTO dto, Item item) {
-        return Reward.builder()
-                .id(dto.getId())
+        Reward.RewardBuilder builder = Reward.builder()
                 .name(dto.getName())
                 .maxXp(dto.getMaxXp())
                 .minXp(dto.getMinXp())
-                .item(item)
-                .build();
+                .item(item);
+
+        if (dto.getId() != null) {
+            builder.id(dto.getId());
+        }
+        return builder.build();
     }
 }
 

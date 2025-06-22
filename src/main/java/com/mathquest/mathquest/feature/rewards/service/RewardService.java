@@ -45,7 +45,8 @@ public class RewardService {
     }
 
     public void createReward(RewardDTO rewardDTO) {
-        rewardRepository.save(RewardDTO.toEntity(rewardDTO, null));
+        Item item = itemService.getItemByIdOrThrow(rewardDTO.getItemId());
+        rewardRepository.save(RewardDTO.toEntity(rewardDTO, item));
     }
 
     public void deleteReward(Long id) {

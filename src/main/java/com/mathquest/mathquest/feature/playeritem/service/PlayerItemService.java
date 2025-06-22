@@ -78,7 +78,11 @@ public class PlayerItemService {
 
     private PlayerItemDTO convertToDTO(PlayerItem playerItem) {
         PlayerItemDTO dto = new PlayerItemDTO();
-        BeanUtils.copyProperties(playerItem, dto);
+        dto.setId(playerItem.getId());
+
+        dto.setPlayer(PlayerDTO.fromEntity(playerItem.getPlayer()));
+        dto.setItem(ItemDTO.fromEntity(playerItem.getItem()));
+
         return dto;
     }
 
@@ -91,5 +95,15 @@ public class PlayerItemService {
 
     public void savePlayerItem(PlayerItem playerItem) {
         playerItemRepository.save(playerItem);
+    }
+
+    public List<PlayerItemDTO> getPlayerItemsByPlayerId(Long playerId) {
+        // 1. Busca as relações do jogador
+        List<PlayerItem> playerItems = playerItemRepository.findByPlayerId(playerId);
+
+        // 2. Converte para DTO; se não houver itens, devolve lista vazia
+        return playerItems.stream()
+                .map(this::convertToDTO)   // usa o mesmo mapper que já existe no serviço
+                .toList();
     }
 }

@@ -27,6 +27,11 @@ public class PlayerItemController {
         return playerItemService.getPlayerItemById(id);
     }
 
+    @GetMapping("/player/{playerId}")
+    public List<PlayerItemDTO> getPlayerItemsByPlayerId(@PathVariable Long playerId) {
+        return playerItemService.getPlayerItemsByPlayerId(playerId);
+    }
+
     @PutMapping("/{id}")
     public PlayerItemDTO editPlayerItem(@RequestBody PlayerItemDTO playerItemDTO, @PathVariable Long id) {
         return playerItemService.editPlayerItem(playerItemDTO, id);
