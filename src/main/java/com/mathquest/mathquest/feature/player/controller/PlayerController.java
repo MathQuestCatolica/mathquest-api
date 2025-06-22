@@ -74,6 +74,18 @@ public class PlayerController {
         return ResponseEntity.ok(response);
     }
 
+    @PutMapping("/{id}/dead")
+    public ResponseEntity<ResponseDTO<Player>> markPlayerAsDead(@PathVariable Long id) {
+        Player updated = playerService.deadPlayer(id);
 
+        ResponseDTO<Player> response = new ResponseDTO<>(
+                200,
+                "Player dead successfully",
+                LocalDateTime.now(),
+                updated
+        );
 
+        return ResponseEntity.ok(response);
+    }
+    
 }

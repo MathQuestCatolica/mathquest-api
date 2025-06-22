@@ -73,4 +73,25 @@ public class PlayerService {
     public Player getPlayerByUsername(String username) {
         return playerRepository.findByUsername(username);
     }
+
+    public Player deadPlayer(Long id) {
+        Player player = playerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Player not found with id: " + id));
+
+        Integer xpPlayer = player.getXp();
+
+        if (xpPlayer == 0) return player;
+
+        if (xpPlayer < 0) {
+            player.setXp(0);
+        } else {
+            player.setXp(xpPlayer - 50);
+
+            if (player.getXp() < 0) {
+                player.setXp(0);
+            }
+        }
+        playerRepository.save(player);
+        return player;
+    }
 }
