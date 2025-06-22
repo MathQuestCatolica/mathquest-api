@@ -6,13 +6,19 @@ import com.mathquest.mathquest.feature.item.repository.ItemRepository;
 import com.mathquest.mathquest.feature.item.service.ItemService;
 import com.mathquest.mathquest.feature.player.domain.Player;
 import com.mathquest.mathquest.feature.player.dto.PlayerDTO;
+import com.mathquest.mathquest.feature.player.service.PlayerService;
+import com.mathquest.mathquest.feature.playeritem.domain.PlayerItem;
+import com.mathquest.mathquest.feature.playeritem.service.PlayerItemService;
 import com.mathquest.mathquest.feature.rewards.domain.Reward;
 import com.mathquest.mathquest.feature.rewards.dto.RewardDTO;
 import com.mathquest.mathquest.feature.rewards.repository.RewardRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class RewardService {
@@ -21,6 +27,10 @@ public class RewardService {
 
     @Autowired
     private ItemService itemService;
+    @Autowired
+    private PlayerService playerService;
+    @Autowired
+    private PlayerItemService playerItemService;
 
     public List<RewardDTO> getAllRewards() {
         return rewardRepository.findAll().stream()
@@ -60,5 +70,33 @@ public class RewardService {
         rewardRepository.save(reward);
 
         return RewardDTO.fromEntity(reward);
+    }
+
+    @Transactional
+    public void recalculateRewards(Long idPlayer) {
+        Player player = playerService.getPlayerByIdOrThrow(idPlayer);
+        long xp = player.getXp();
+
+        List<Reward> rewards = rewardRepository.findRewardsForXp(xp);
+
+        Set<Long> ownedItemIds = player.getPlayerItems().stream()
+                .map(pi -> pi.getItem().getId())
+                .collect(Collectors.toSet());
+
+        for (Reward reward : rewards) {
+            Item rewardItem = reward.getItem();
+            Long itemId = rewardItem.getId();
+
+            if (!ownedItemIds.contains(itemId)) {
+                PlayerItem link = new PlayerItem();
+                link.setPlayer(player);
+                link.setItem(rewardItem);
+
+                playerItemService.savePlayerItem(link);
+                player.getPlayerItems().add(link);
+
+                ownedItemIds.add(itemId);
+            }
+        }
     }
 }

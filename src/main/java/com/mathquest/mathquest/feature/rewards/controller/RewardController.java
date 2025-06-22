@@ -78,4 +78,12 @@ public class RewardController {
                 new ResponseDTO<>(204, "Reward deleted successfully", LocalDateTime.now(), null)
         );
     }
+
+    @PutMapping("/recalculate/{idPlayer}")
+    public ResponseEntity<ResponseDTO<Void>> recalculateRewards(@PathVariable Long idPlayer) {
+        rewardService.recalculateRewards(idPlayer);
+        return ResponseEntity.ok(
+                new ResponseDTO<>(200, "Rewards recalculated successfully", LocalDateTime.now(), null)
+        );
+    }
 }

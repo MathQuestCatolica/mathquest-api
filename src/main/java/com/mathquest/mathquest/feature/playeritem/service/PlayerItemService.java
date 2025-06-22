@@ -88,4 +88,8 @@ public class PlayerItemService {
         playerItem.setItem(itemService.getItemByIdOrThrow(dto.getItem().getId()));
         return playerItem;
     }
+
+    public void savePlayerItem(PlayerItem playerItem) {
+        playerItemRepository.save(playerItem);
+    }
 }

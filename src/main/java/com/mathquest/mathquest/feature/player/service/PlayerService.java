@@ -94,4 +94,8 @@ public class PlayerService {
         playerRepository.save(player);
         return player;
     }
+
+    public void savePlayer(Player player) {
+        playerRepository.save(player);
+    }
 }
