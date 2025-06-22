@@ -22,6 +22,10 @@ public class ScenarioService {
                 .toList();
     }
 
+    public Scenario getScenarioEntityByID(Long id) {
+        return scenarioRepository.findById(id).get();
+    }
+
     public ScenarioDTO getScenarioById(Long id) {
         return scenarioRepository.findById(id)
                 .map(sceneario -> new ScenarioDTO(sceneario.getId(), sceneario.getName(), sceneario.getMode(), sceneario.getRoute()))

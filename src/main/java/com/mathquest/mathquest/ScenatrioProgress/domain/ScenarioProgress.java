@@ -1,4 +1,4 @@
-package com.mathquest.mathquest.ScenatrioProgress;
+package com.mathquest.mathquest.ScenatrioProgress.domain;
 
 import com.mathquest.mathquest.feature.player.domain.Player;
 import com.mathquest.mathquest.feature.scenario.domain.Scenario;

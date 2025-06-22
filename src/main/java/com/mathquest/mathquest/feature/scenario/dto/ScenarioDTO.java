@@ -1,8 +1,15 @@
 package com.mathquest.mathquest.feature.scenario.dto;
 
+import com.mathquest.mathquest.feature.scenario.domain.Scenario;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ScenarioDTO {
     private Long id;
     private String name;
@@ -16,6 +23,25 @@ public class ScenarioDTO {
         this.route = route;
     }
 
-    public ScenarioDTO() {
+
+    public static ScenarioDTO build(Scenario entity) {
+        if (entity == null) return null;
+
+        return ScenarioDTO.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .mode(entity.getMode())
+                .route(entity.getRoute())
+                .build();
     }
+
+    public Scenario toEntity() {
+        Scenario scenario = new Scenario();
+        scenario.setId(this.id);
+        scenario.setName(this.name);
+        scenario.setMode(this.mode);
+        scenario.setRoute(this.route);
+        return scenario;
+    }
+
 }
