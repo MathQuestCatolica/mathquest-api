@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface PlayerItemRepository extends JpaRepository<PlayerItem, Long> {
     List<PlayerItem> findByPlayerId(Long playerId);
+
+    void deleteByPlayerId(Long playerId);
 }

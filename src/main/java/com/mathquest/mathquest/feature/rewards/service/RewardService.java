@@ -6,14 +6,16 @@ import com.mathquest.mathquest.feature.item.repository.ItemRepository;
 import com.mathquest.mathquest.feature.item.service.ItemService;
 import com.mathquest.mathquest.feature.player.domain.Player;
 import com.mathquest.mathquest.feature.player.dto.PlayerDTO;
+import com.mathquest.mathquest.feature.player.repository.PlayerRepository;
 import com.mathquest.mathquest.feature.player.service.PlayerService;
 import com.mathquest.mathquest.feature.playeritem.domain.PlayerItem;
+import com.mathquest.mathquest.feature.playeritem.repository.PlayerItemRepository;
 import com.mathquest.mathquest.feature.playeritem.service.PlayerItemService;
 import com.mathquest.mathquest.feature.rewards.domain.Reward;
 import com.mathquest.mathquest.feature.rewards.dto.RewardDTO;
 import com.mathquest.mathquest.feature.rewards.repository.RewardRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,16 +23,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class RewardService {
-    @Autowired
-    private RewardRepository rewardRepository;
-
-    @Autowired
-    private ItemService itemService;
-    @Autowired
-    private PlayerService playerService;
-    @Autowired
-    private PlayerItemService playerItemService;
+    private final RewardRepository rewardRepository;
+    private final ItemService itemService;
+    private final PlayerRepository playerRepository;
+    private final PlayerItemRepository playerItemRepository;
 
     public List<RewardDTO> getAllRewards() {
         return rewardRepository.findAll().stream()
@@ -74,30 +72,26 @@ public class RewardService {
     }
 
     @Transactional
-    public void recalculateRewards(Long idPlayer) {
-        Player player = playerService.getPlayerByIdOrThrow(idPlayer);
-        long xp = player.getXp();
+    public void recalculateRewards(Long playerId) {
 
-        List<Reward> rewards = rewardRepository.findRewardsForXp(xp);
+        Player player = playerRepository.findById(playerId)
+                .orElseThrow(() -> new RuntimeException("Player not found"));
 
-        Set<Long> ownedItemIds = player.getPlayerItems().stream()
-                .map(pi -> pi.getItem().getId())
-                .collect(Collectors.toSet());
+        if (!player.getPlayerItems().isEmpty()) {
+            playerItemRepository.deleteByPlayerId(playerId);
+            player.getPlayerItems().clear();
+        }
+
+        List<Reward> rewards = rewardRepository.findRewardsForXp(player.getXp());
 
         for (Reward reward : rewards) {
-            Item rewardItem = reward.getItem();
-            Long itemId = rewardItem.getId();
+            PlayerItem link = new PlayerItem();
+            link.setPlayer(player);
+            link.setItem(reward.getItem());
 
-            if (!ownedItemIds.contains(itemId)) {
-                PlayerItem link = new PlayerItem();
-                link.setPlayer(player);
-                link.setItem(rewardItem);
-
-                playerItemService.savePlayerItem(link);
-                player.getPlayerItems().add(link);
-
-                ownedItemIds.add(itemId);
-            }
+            playerItemRepository.save(link);
+            player.getPlayerItems().add(link);
         }
     }
+
 }

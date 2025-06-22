@@ -94,4 +94,15 @@ public class ScenarioProgressController {
                 new ResponseDTO<>(201, "Scenario progress registered", LocalDateTime.now(), created)
         );
     }
+
+    @PostMapping("/pass")
+    public ResponseEntity<ResponseDTO<ScenarioProgressDTO>> passScenario(
+            @RequestBody AssignScenarioProgressDTO dto) {
+
+        ScenarioProgressDTO finished = scenarioProgressService.passScenario(dto);
+
+        return ResponseEntity.status(201).body(
+                new ResponseDTO<>(201, "Scenario finished, rewards recalculated",
+                        LocalDateTime.now(), finished));
+    }
 }

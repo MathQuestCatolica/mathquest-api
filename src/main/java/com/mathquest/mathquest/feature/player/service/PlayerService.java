@@ -3,6 +3,7 @@ package com.mathquest.mathquest.feature.player.service;
 import com.mathquest.mathquest.feature.player.domain.Player;
 import com.mathquest.mathquest.feature.player.dto.PlayerDTO;
 import com.mathquest.mathquest.feature.player.repository.PlayerRepository;
+import com.mathquest.mathquest.feature.rewards.service.RewardService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,9 +13,11 @@ import java.util.Objects;
 public class PlayerService {
 
     private final PlayerRepository playerRepository;
+    private final RewardService rewardService;
 
-    public PlayerService(PlayerRepository playerRepository) {
+    public PlayerService(PlayerRepository playerRepository, RewardService rewardService) {
         this.playerRepository = playerRepository;
+        this.rewardService = rewardService;
     }
 
     public Player createPlayer(PlayerDTO playerDTO) {
@@ -92,6 +95,7 @@ public class PlayerService {
             }
         }
         playerRepository.save(player);
+        rewardService.recalculateRewards(player.getId());
         return player;
     }
 

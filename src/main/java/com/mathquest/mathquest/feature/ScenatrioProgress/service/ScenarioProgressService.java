@@ -118,7 +118,11 @@ public class ScenarioProgressService {
     public ScenarioProgressDTO passScenario(AssignScenarioProgressDTO dto) {
 
         Player player = playerService.getPlayerByIdOrThrow(dto.getPlayerId());
-        Scenario scenario = scenarioService.getScenarioEntityByID(dto.getScenarioId());
+        Scenario newScenario = scenarioService.getScenarioEntityByID(dto.getScenarioId() + 1);
+
+        if (newScenario == null) {
+            throw new RuntimeException("Next scenario not found");
+        }
 
         player.setLevel(player.getLevel() + 1);
         player.setXp(player.getXp() + 100);
@@ -127,7 +131,7 @@ public class ScenarioProgressService {
 
         ScenarioProgress progress = new ScenarioProgress();
         progress.setPlayer(player);
-        progress.setScenario(scenario);
+        progress.setScenario(newScenario);
         progress.setTotalTime(dto.getTotalTime());
 
         progress = scenarioProgressRepository.save(progress);
