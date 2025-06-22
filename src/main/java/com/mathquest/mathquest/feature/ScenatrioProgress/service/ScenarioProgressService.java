@@ -1,9 +1,9 @@
-package com.mathquest.mathquest.ScenatrioProgress.service;
+package com.mathquest.mathquest.feature.ScenatrioProgress.service;
 
-import com.mathquest.mathquest.ScenatrioProgress.domain.ScenarioProgress;
-import com.mathquest.mathquest.ScenatrioProgress.dto.AssignScenarioProgressDTO;
-import com.mathquest.mathquest.ScenatrioProgress.dto.ScenarioProgressDTO;
-import com.mathquest.mathquest.ScenatrioProgress.repository.ScenarioProgressRepository;
+import com.mathquest.mathquest.feature.ScenatrioProgress.domain.ScenarioProgress;
+import com.mathquest.mathquest.feature.ScenatrioProgress.dto.AssignScenarioProgressDTO;
+import com.mathquest.mathquest.feature.ScenatrioProgress.dto.ScenarioProgressDTO;
+import com.mathquest.mathquest.feature.ScenatrioProgress.repository.ScenarioProgressRepository;
 import com.mathquest.mathquest.feature.player.domain.Player;
 import com.mathquest.mathquest.feature.player.service.PlayerService;
 import com.mathquest.mathquest.feature.scenario.domain.Scenario;

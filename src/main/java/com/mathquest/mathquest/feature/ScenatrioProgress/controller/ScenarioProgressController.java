@@ -1,9 +1,9 @@
-package com.mathquest.mathquest.ScenatrioProgress.controller;
+package com.mathquest.mathquest.feature.ScenatrioProgress.controller;
 
 
-import com.mathquest.mathquest.ScenatrioProgress.dto.AssignScenarioProgressDTO;
-import com.mathquest.mathquest.ScenatrioProgress.dto.ScenarioProgressDTO;
-import com.mathquest.mathquest.ScenatrioProgress.service.ScenarioProgressService;
+import com.mathquest.mathquest.feature.ScenatrioProgress.dto.AssignScenarioProgressDTO;
+import com.mathquest.mathquest.feature.ScenatrioProgress.dto.ScenarioProgressDTO;
+import com.mathquest.mathquest.feature.ScenatrioProgress.service.ScenarioProgressService;
 import com.mathquest.mathquest.shared.dto.ResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

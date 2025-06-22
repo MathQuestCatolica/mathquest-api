@@ -1,6 +1,6 @@
-package com.mathquest.mathquest.ScenatrioProgress.dto;
+package com.mathquest.mathquest.feature.ScenatrioProgress.dto;
 
-import com.mathquest.mathquest.ScenatrioProgress.domain.ScenarioProgress;
+import com.mathquest.mathquest.feature.ScenatrioProgress.domain.ScenarioProgress;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

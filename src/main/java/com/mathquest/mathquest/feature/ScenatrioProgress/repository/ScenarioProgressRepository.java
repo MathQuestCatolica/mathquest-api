@@ -1,6 +1,6 @@
-package com.mathquest.mathquest.ScenatrioProgress.repository;
+package com.mathquest.mathquest.feature.ScenatrioProgress.repository;
 
-import com.mathquest.mathquest.ScenatrioProgress.domain.ScenarioProgress;
+import com.mathquest.mathquest.feature.ScenatrioProgress.domain.ScenarioProgress;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

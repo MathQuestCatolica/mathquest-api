@@ -1,4 +1,4 @@
-package com.mathquest.mathquest.ScenatrioProgress.dto;
+package com.mathquest.mathquest.feature.ScenatrioProgress.dto;
 
 import lombok.Data;
 
